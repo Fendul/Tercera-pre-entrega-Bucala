@@ -1,0 +1,11 @@
+{% extends "appmuebleria/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    <p>BUSCAR PRODUCTO POR CODIGO</p>
+    <form action="../buscar/" method="GET">
+        <input type="number" name="codigo" id="codigo">
+        <input type="submit" value="Buscar">
+    </form>
+{% endblock %}

@@ -37,12 +37,38 @@ def cliente (request):
 
 def producto (request):
     
-    return render (request, "appmuebleria/producto.html")
+    if request.method == "POST":
+        miFormulario = ProductoFormulario(request.POST)
+        print(miFormulario)
+        
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            producto = Producto (codigo=informacion["codigo"], descripcion=informacion["descripcion"], precio=informacion["precio"])
+            producto.save()
+            return render (request, "appmuebleria/inicio.html")
+    else:
+        miFormulario = ProductoFormulario()
+    
+    return render (request, "appmuebleria/producto.html",{"miFormulario":miFormulario})
 
 def inicio (request):
     
     return render (request, "appmuebleria/inicio.html")
 
-def contacto (request):
+def buscarProducto (request):
     
-    return render (request, "appmuebleria/contacto.html")
+    return render (request, "appmuebleria/buscarProducto.html")
+
+def buscar (request):
+    
+    if request.GET["codigo"]:
+        codigo = request.GET['codigo']
+        productos = Producto.objects.filter(codigo__icontains=codigo)
+        
+        return render (request, "appmuebleria/resultadoBusqueda.html", {"productos":productos, "codigo":codigo})
+    
+    else:
+        
+        respuesta ="No enviaste datos"
+    
+    return HttpResponse (respuesta)

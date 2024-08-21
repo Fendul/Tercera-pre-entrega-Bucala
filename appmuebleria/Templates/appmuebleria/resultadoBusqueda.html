@@ -1,0 +1,17 @@
+{% extends "appmuebleria/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    <p>Resultado busqueda de producto</p>
+    
+    {% if productos %}
+    <ul>
+        {% for producto in productos %}
+            <li>{{producto.codigo}}</li>
+            <li>{{producto.descripcion}}</li>
+            <li>{{producto.precio}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
