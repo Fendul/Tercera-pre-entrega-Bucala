@@ -72,3 +72,7 @@ def buscar (request):
         respuesta ="No enviaste datos"
     
     return HttpResponse (respuesta)
+
+def catalogo (request):
+    
+    return render (request, "appmuebleria/catalogo.html")
