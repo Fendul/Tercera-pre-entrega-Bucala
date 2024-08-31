@@ -62,7 +62,7 @@ def buscarProducto (request):
 def buscar (request):
     
     if request.GET["codigo"]:
-        codigo = request.GET['codigo']
+        codigo = request.GET["codigo"]
         productos = Producto.objects.filter(codigo__icontains=codigo)
         
         return render (request, "appmuebleria/resultadoBusqueda.html", {"productos":productos, "codigo":codigo})
